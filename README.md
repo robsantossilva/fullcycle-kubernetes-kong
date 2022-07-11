@@ -130,3 +130,34 @@ Containers:
 10.244.0.1 - - [06/Jul/2022:00:36:54 +0000] "POST /api/bets HTTP/1.1" 201 134 "-" "PostmanRuntime/7.29.0"
 
 ```
+
+### Kong + OpenID Connect
+
+Acessar keycloak fora do contexto do cluster K8S
+```bash
+kubectl port-forward svc/keycloak 8080:80 -n iam
+```
+
+1 - Criar Client para o Kong
+2 - Criar User
+
+**Configurar plugin**
+
+Ativar validação do token através da chave pública
+```yaml
+bearer_only: "yes"
+bearer_jwt_auth_enable: "yes"
+```
+
+```bash
+kubectl apply -f ./infra/kong-k8s/misc/apis/kopenid.yaml -n bets
+```
+
+**Ativar plugin no Ingress ./bets-api.yaml**
+```yaml
+konghq.com/plugins: oidc-bets
+```
+
+```bash
+kubectl apply -f ./infra/kong-k8s/misc/apis/bets-api.yaml -n bets
+```
