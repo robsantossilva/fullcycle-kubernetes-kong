@@ -161,3 +161,19 @@ konghq.com/plugins: oidc-bets
 ```bash
 kubectl apply -f ./infra/kong-k8s/misc/apis/bets-api.yaml -n bets
 ```
+
+### APIOps
+É um conceito que aplica os solidos e testados princípios de DevOps e GitOps para o ciclo de vida das APIs e Microsserviços
+
+### GitOps
+É uma prática que usa Infraestrutura como código, que implica que um determinado ambiente (dev, homologação, prod) esteja criado em uma maneira declarativa através de manifestos, e que através de automação seja possível recriar o ambiente de maneira repetitiva.
+
+Os manifestos devem estar armazenados dentro de um **repositório** git
+
+![](.github/git-ops.JPG)
+
+### Ferramentas Necessárias
+- Github Actins
+- Spectral
+- Postman
+- ArgoCD
