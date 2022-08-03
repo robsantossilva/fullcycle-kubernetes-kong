@@ -1,0 +1,12 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongIngress
+metadata:
+  name: players-do-not-preserve-host
+route:
+  preserve_host: false
+upstream:
+  host_header: players.bets.svc
+proxy:
+  connect_timeout: 2000
+  read_timeout: 2000
+  write_timeout: 2000

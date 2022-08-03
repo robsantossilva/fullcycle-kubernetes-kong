@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: players
+  namespace: bets
+  annotations:
+    kubernetes.io/ingress.class: kong
+    konghq.com/override: players-do-not-preserve-host
+    konghq.com/plugins: prometheus-players
+  labels:
+    app: players
+    app.kubernetes.io/instance: players
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: players
+    app.kubernetes.io/version: 1.16.0
+    helm.sh/chart: players-0.1.0
+    version: 1.16.0
+spec:
+  rules:
+    - http:
+        paths:
+          - pathType: Prefix
+            path: /api/players
+            backend:
+              service:
+                name: players
+                port:
+                  number: 9999
+            
+            

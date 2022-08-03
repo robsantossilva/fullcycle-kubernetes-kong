@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: bets-api
+  namespace: bets
   annotations:
     kubernetes.io/ingress.class: "kong"
     konghq.com/override: do-not-preserve-host
