@@ -76,13 +76,13 @@ Este roteamento de tráfego é controlado por regras definidas dentro do recurso
 **Instalando fluentd**
 ```bash
 
-> helm repo add bitnami https://charts.bitnami.com/bitnami
+> helm repo add fluent https://fluent.github.io/helm-charts
 
 > helm repo update
 
 > kubectl create ns logs
 
-> helm install fluentd bitnami/fluentd --namespace logs
+> helm install fluentd fluent/fluentd --namespace=logs -f fluentd-values.yaml
 ```
 
 **Instalando Kong**
@@ -319,4 +319,14 @@ NAME                                                    READY   STATUS      REST
 {"type":"line","content":"\nrunning (1m00.0s), 4/5 VUs, 524220 complete and 0 interrupted iterations\ndefault   [  19% ] 4/5 VUs  1m00.0s/5m10.0s\n"}
 {"type":"line","content":"\nrunning (1m01.0s), 4/5 VUs, 543313 complete and 0 interrupted iterations\ndefault   [  20% ] 4/5 VUs  1m01.0s/5m10.0s\n"}
 {"type":"line","content":"\nrunning (1m02.0s), 4/5 VUs, 563273 complete and 0 interrupted iterations\ndefault   [  20% ] 4/5 VUs  1m02.0s/5m10.0s\n"}
+```
+
+### Stack de coleta de Logs (EFK)
+
+- Elasticsearch (infra/kong-k8s/efk/elastic)
+- Fluentd (infra/kong-k8s/efk/fluentd)
+- Kibana (infra/kong-k8s/efk/kibana)
+
+```bash
+kubectl port-forward svc/kibana-kibana 5601:5601 -n logs
 ```
